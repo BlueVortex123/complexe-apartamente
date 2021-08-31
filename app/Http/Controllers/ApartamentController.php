@@ -14,7 +14,7 @@ class ApartamentController extends Controller
      */
     public function index()
     {
-        //
+        $apartament = Apartament::with(['cladire','proprietari'])->get();
     }
 
     /**
@@ -35,7 +35,15 @@ class ApartamentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valdiated = $request->validate([
+            'etaj' => 'required',
+            'numar' => 'required',
+            'suprafata' => 'required',
+            'numar_camere' => 'required',
+            ]);
+
+        $apartamente = new Apartament($valdiated);
+        $apartamente->cladiri_id = $request->cladiri_id;
     }
 
     /**

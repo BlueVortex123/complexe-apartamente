@@ -36,9 +36,20 @@ class ComplexController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nume' => 'required|string|min:3|max:255',
+            'adresa' => 'required|string|min:3|max:255',
+            
+        ]);
+        
+        $complex = new Complex($validated);
+        $complex->nume = $request->nume;
+        $complex->adresa = $request->adresa;
+        $complex->save();
+        
+        
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -49,7 +60,7 @@ class ComplexController extends Controller
     {
         //
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -60,7 +71,7 @@ class ComplexController extends Controller
     {
         //
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -70,7 +81,14 @@ class ComplexController extends Controller
      */
     public function update(Request $request, Complex $complex)
     {
-        //
+        $validated = $request->validate([
+            'nume' => 'required|string|min:3|max:255',
+            'adresa' => 'required|string|min:3|max:255',
+            
+        ]);
+        
+        $complex->update($validated);
+        $complex->save();
     }
 
     /**
@@ -81,6 +99,6 @@ class ComplexController extends Controller
      */
     public function destroy(Complex $complex)
     {
-        //
+        $complex->delete();
     }
 }

@@ -14,7 +14,7 @@ class CladireController extends Controller
      */
     public function index()
     {
-        //
+        $cladire = Cladire::with(['complex','apartamente'])->get();
     }
 
     /**
@@ -35,9 +35,16 @@ class CladireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nume' => 'required|string|min:3|max:255',
+            'numar_etaje' => 'required|string|min:1|max:2',
+        ]);
+        
+        $cladire = new Cladire($validated);
+        $cladire->complex_id = $request->cladire_id;
+        $cladire->save();
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -48,7 +55,7 @@ class CladireController extends Controller
     {
         //
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -59,7 +66,7 @@ class CladireController extends Controller
     {
         //
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -69,7 +76,14 @@ class CladireController extends Controller
      */
     public function update(Request $request, Cladire $cladire)
     {
-        //
+        $validated = $request->validate([
+            'nume' => 'required|string|min:3|max:255',
+            'numar_etaje' => 'required|string|min:1|max:2',
+        ]);
+        
+        $cladire->update($validated);
+        $cladire->complex_id = $request->complex_id;
+        $cladire->save();
     }
 
     /**

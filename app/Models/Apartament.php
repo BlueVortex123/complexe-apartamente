@@ -27,6 +27,6 @@ class Apartament extends Model
 
     public function proprietar()
     {
-        return $this->hasOne(Proprietar::class,'proprietari_id');
+        return $this->belongsTo(Proprietar::class,'proprietari_id');
     }
 }

@@ -20,6 +20,6 @@ class Proprietar extends Model
 
     public function apartament()
     {
-        return $this->hasOne(Apartament::class);
+        return $this->hasMany(Apartament::class);
     }
 }

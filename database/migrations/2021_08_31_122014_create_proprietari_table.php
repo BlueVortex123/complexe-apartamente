@@ -15,6 +15,12 @@ class CreateProprietariTable extends Migration
     {
         Schema::create('proprietari', function (Blueprint $table) {
             $table->id();
+            $table->string('nume');
+            $table->string('CNP');
+            $table->string('adresa');
+            $table->string('telefon');
+            $table->string('email');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

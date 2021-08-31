@@ -10,4 +10,14 @@ class Complex extends Model
     use HasFactory;
 
     protected $table = 'complexe';
+
+    protected $fillable = [
+        'nume',
+        'adresa'
+    ];
+
+    public function cladiri()
+    {
+        return $this->hasMany(Cladire::class);
+    }
 }

@@ -15,6 +15,9 @@ class CreateComplexeTable extends Migration
     {
         Schema::create('complexe', function (Blueprint $table) {
             $table->id();
+            $table->string('nume');
+            $table->string('adresa');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

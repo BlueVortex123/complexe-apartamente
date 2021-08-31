@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::resource('/complexe', App\Models\Complex::class);
+Route::resource('/cladiri', App\Models\Cladire::class);
+Route::resource('/apartamente',App\Models\Apartament::class);
+Route::resource('/proprietari', App\Models\Proprietar::class);

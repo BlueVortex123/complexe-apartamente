@@ -8,4 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Apartament extends Model
 {
     use HasFactory;
+    protected $table = 'apartamente';
+
+    protected $fillable =[
+        'cladiri_id',
+        'etaj',
+        'numar',
+        'suprafata',
+        'numar_camere',
+        'vedere'
+
+    ];
+
+    public function cladire()
+    {
+        return $this->belongsTo(Cladire::class,'cladiri_id');
+    }
+
+    public function proprietar()
+    {
+        return $this->hasOne(Proprietar::class,'proprietari_id');
+    }
 }

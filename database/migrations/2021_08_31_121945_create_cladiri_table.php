@@ -15,6 +15,10 @@ class CreateCladiriTable extends Migration
     {
         Schema::create('cladiri', function (Blueprint $table) {
             $table->id();
+            $table->integer('complex_id');
+            $table->string('nume');
+            $table->string('numar_etaje');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

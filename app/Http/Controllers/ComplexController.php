@@ -14,7 +14,8 @@ class ComplexController extends Controller
      */
     public function index()
     {
-        //
+        $complex = Complex::all();
+        
     }
 
     /**

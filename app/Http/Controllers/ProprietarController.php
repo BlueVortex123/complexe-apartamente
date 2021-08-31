@@ -14,7 +14,7 @@ class ProprietarController extends Controller
      */
     public function index()
     {
-        //
+        $proprietar = Proprietar::with('apartment')->get();
     }
 
     /**
@@ -35,9 +35,20 @@ class ProprietarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nume' => 'required|string',
+            'CNP' => 'required|string|min:13|max:13',
+            'adresa' => 'required|string|min:4|max:255',
+            'telefon' => 'required|string|min:5|max:20',
+            'email' => 'required|email|min:5|max:13',
+        ]);
+        
+        $proprietar = new Proprietar($validated);
+        
+        
+        $proprietar->save();
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -48,7 +59,7 @@ class ProprietarController extends Controller
     {
         //
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -59,7 +70,7 @@ class ProprietarController extends Controller
     {
         //
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -69,9 +80,19 @@ class ProprietarController extends Controller
      */
     public function update(Request $request, Proprietar $proprietar)
     {
-        //
-    }
+        $validated = $request->validate([
+            'nume' => 'required|string',
+            'CNP' => 'required|string|min:13|max:13',
+            'adresa' => 'required|string|min:4|max:255',
+            'telefon' => 'required|string|min:5|max:20',
+            'email' => 'required|email|min:5|max:13',
+        ]);
+        
+        $proprietar->update($validated);
 
+        $proprietar->save();
+    }
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -80,6 +101,28 @@ class ProprietarController extends Controller
      */
     public function destroy(Proprietar $proprietar)
     {
-        //
+        $proprietar->delete();
+
     }
+
+    
+    public function onlyTrashedProprietari()
+    {
+        $proprietari = Proprietar::onlyTrashed()->whereNotNull('deleted_at')->get();
+      
+    }
+
+    public function restoreProprietari(Request $request, $id)
+    {
+        Proprietar::onlyTrashed()->find($id)->restore();
+        
+    }
+
+    public function permanentlyDeleteProprietari(Request $request, $id)
+    {
+        Proprietar::onlyTrashed()->find($id)->forceDelete();
+     
+    }
+
+
 }

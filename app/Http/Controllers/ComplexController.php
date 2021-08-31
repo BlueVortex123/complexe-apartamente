@@ -101,4 +101,22 @@ class ComplexController extends Controller
     {
         $complex->delete();
     }
+
+    public function onlyTrashedComplex()
+    {
+        $complexx = Complex::onlyTrashed()->whereNotNull('deleted_at')->get();
+      
+    }
+
+    public function restoreComplex(Request $request, $id)
+    {
+        Complex::onlyTrashed()->find($id)->restore();
+        
+    }
+
+    public function permanentlyDeleteComplex(Request $request, $id)
+    {
+        Complex::onlyTrashed()->find($id)->forceDelete();
+     
+    }
 }

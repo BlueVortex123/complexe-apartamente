@@ -41,43 +41,55 @@ class ApartamentController extends Controller
             'suprafata' => 'required',
             'numar_camere' => 'required',
             ]);
+            
+            $apartamente = new Apartament($valdiated);
+            $apartamente->cladiri_id = $request->cladiri_id;
+            
+            $apartamente->save();
+        }
+        
+        /**
+         * Display the specified resource.
+         *
+         * @param  \App\Models\Apartament  $apartament
+         * @return \Illuminate\Http\Response
+         */
+        public function show(Apartament $apartament)
+        {
+            //
+        }
+        
+        /**
+         * Show the form for editing the specified resource.
+         *
+         * @param  \App\Models\Apartament  $apartament
+         * @return \Illuminate\Http\Response
+         */
+        public function edit(Apartament $apartament)
+        {
+            //
+        }
+        
+        /**
+         * Update the specified resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @param  \App\Models\Apartament  $apartament
+         * @return \Illuminate\Http\Response
+         */
+        public function update(Request $request, Apartament $apartament)
+        {
+            
+            $valdiated = $request->validate([
+                'etaj' => 'required',
+                'numar' => 'required',
+                'suprafata' => 'required',
+                'numar_camere' => 'required',
+                ]);
 
-        $apartamente = new Apartament($valdiated);
-        $apartamente->cladiri_id = $request->cladiri_id;
-    }
+            $apartament->update($valdiated);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Apartament  $apartament
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Apartament $apartament)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Apartament  $apartament
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Apartament $apartament)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Apartament  $apartament
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Apartament $apartament)
-    {
-        //
+            $apartament->save();
     }
 
     /**
@@ -88,6 +100,25 @@ class ApartamentController extends Controller
      */
     public function destroy(Apartament $apartament)
     {
-        //
+        $apartament->delete();
+    }
+
+
+    public function onlyTrashedApartament()
+    {
+        $apartament = Apartament::onlyTrashed()->whereNotNull('deleted_at')->get();
+      
+    }
+
+    public function restoreApartament(Request $request, $id)
+    {
+        Apartament::onlyTrashed()->find($id)->restore();
+        
+    }
+
+    public function permanentlyDeleteApartament(Request $request, $id)
+    {
+        Apartament::onlyTrashed()->find($id)->forceDelete();
+     
     }
 }

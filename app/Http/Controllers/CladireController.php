@@ -94,6 +94,26 @@ class CladireController extends Controller
      */
     public function destroy(Cladire $cladire)
     {
-        //
+        
     }
+
+    public function onlyTrashedCladiri()
+    {
+        $cladire = Cladire::onlyTrashed()->whereNotNull('deleted_at')->get();
+      
+    }
+
+    public function restoreCladiri(Request $request, $id)
+    {
+        Cladire::onlyTrashed()->find($id)->restore();
+        
+    }
+
+    public function permanentlyDeleteCladiri(Request $request, $id)
+    {
+        Cladire::onlyTrashed()->find($id)->forceDelete();
+     
+    }
+
+   
 }

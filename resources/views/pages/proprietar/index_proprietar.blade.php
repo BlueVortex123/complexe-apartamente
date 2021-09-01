@@ -48,7 +48,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- <a href="{{ route('trashed_proprietari') }}" class="btn btn-secondary float-right">Trash</a> --}}
+                        <a href="{{ route('trashed_proprietar') }}" class="btn btn-secondary float-right">Trash</a>
                     </div>
                 </div>
             </div>

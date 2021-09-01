@@ -115,21 +115,23 @@ class ProprietarController extends Controller
     }
 
     
-    public function onlyTrashedProprietari()
+    public function onlyTrashedProprietar()
     {
         $proprietari = Proprietar::onlyTrashed()->whereNotNull('deleted_at')->get();
+        return view('pages.proprietar.trashed_proprietar',compact('proprietari'));
       
     }
 
-    public function restoreProprietari(Request $request, $id)
+    public function restoreProprietar(Request $request, $id)
     {
         Proprietar::onlyTrashed()->find($id)->restore();
-        
+        return redirect()->route('trashed_proprietar');
     }
-
-    public function permanentlyDeleteProprietari(Request $request, $id)
+    
+    public function permanentlyDeleteProprietar(Request $request, $id)
     {
         Proprietar::onlyTrashed()->find($id)->forceDelete();
+        return redirect()->route('trashed_proprietar');
      
     }
 

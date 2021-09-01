@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Proprietar extends Model
 {
-    use HasFactory;
+    use SoftDeletes, HasFactory;
     protected $table = 'proprietari';
 
     protected $fillable =[

@@ -11,7 +11,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="h-100"> 
-
+    @include('navbar.navbar')
     <main class="py-4 h-100">
         @yield('content')
     </main>

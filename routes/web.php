@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/complexe', App\Models\Complex::class);
-Route::resource('/cladiri', App\Models\Cladire::class);
-Route::resource('/apartamente',App\Models\Apartament::class);
-Route::resource('/proprietari', App\Models\Proprietar::class);
+Route::resource('/complexe', App\Http\Controllers\ComplexController::class);
+Route::resource('/cladiri', App\Http\Controllers\CladireController::class);
+Route::resource('/apartamente',\App\Http\Controllers\ApartamentController::class);
+Route::resource('/proprietari', \App\Http\Controllers\ProprietarController::class);

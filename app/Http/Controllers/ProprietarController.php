@@ -14,7 +14,9 @@ class ProprietarController extends Controller
      */
     public function index()
     {
-        $proprietar = Proprietar::with('apartment')->get();
+        $proprietari = Proprietar::with('apartament')->get();
+        dd($proprietari);
+        return view('pages.proprietar.index_prorprietar',compact($proprietari));
     }
 
     /**

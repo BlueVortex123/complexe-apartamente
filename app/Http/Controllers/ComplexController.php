@@ -14,7 +14,8 @@ class ComplexController extends Controller
      */
     public function index()
     {
-        $complex = Complex::all();
+        $complexe = Complex::all();
+        return view('pages.complex.index_complex',compact('complexe'));
         
     }
 
@@ -25,7 +26,7 @@ class ComplexController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.complex.create_complex');
     }
 
     /**
@@ -46,6 +47,8 @@ class ComplexController extends Controller
         $complex->nume = $request->nume;
         $complex->adresa = $request->adresa;
         $complex->save();
+
+        return redirect()->route('complexe.index');
         
         
     }
@@ -56,7 +59,7 @@ class ComplexController extends Controller
      * @param  \App\Models\Complex  $complex
      * @return \Illuminate\Http\Response
      */
-    public function show(Complex $complex)
+    public function show(Complex $complexe)
     {
         //
     }
@@ -67,9 +70,9 @@ class ComplexController extends Controller
      * @param  \App\Models\Complex  $complex
      * @return \Illuminate\Http\Response
      */
-    public function edit(Complex $complex)
+    public function edit(Complex $complexe)
     {
-        //
+        return view('pages.complex.edit_complex',compact('complexe'));
     }
     
     /**
@@ -79,7 +82,7 @@ class ComplexController extends Controller
      * @param  \App\Models\Complex  $complex
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Complex $complex)
+    public function update(Request $request, Complex $complexe)
     {
         $validated = $request->validate([
             'nume' => 'required|string|min:3|max:255',
@@ -87,8 +90,8 @@ class ComplexController extends Controller
             
         ]);
         
-        $complex->update($validated);
-        $complex->save();
+        $complexe->update($validated);
+        $complexe->save();
     }
 
     /**
@@ -97,9 +100,9 @@ class ComplexController extends Controller
      * @param  \App\Models\Complex  $complex
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Complex $complex)
+    public function destroy(Complex $complexe)
     {
-        $complex->delete();
+        $complexe->delete();
     }
 
     public function onlyTrashedComplex()

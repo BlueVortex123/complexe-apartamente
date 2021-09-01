@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cladire;
 use App\Models\Complex;
 use Illuminate\Http\Request;
 
@@ -59,9 +60,11 @@ class ComplexController extends Controller
      * @param  \App\Models\Complex  $complex
      * @return \Illuminate\Http\Response
      */
-    public function show(Complex $complexe)
+    public function show(Complex $complex, $id)
     {
-        //
+      
+        $cladiri = Cladire::with('complex')->where('complex_id',$id)->get();
+        return view('pages.complex.show_complex',compact('cladiri','complex'));
     }
     
     /**

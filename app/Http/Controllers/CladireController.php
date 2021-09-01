@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apartament;
 use App\Models\Cladire;
 use App\Models\Complex;
 use Illuminate\Http\Request;
@@ -56,9 +57,12 @@ class CladireController extends Controller
          * @param  \App\Models\Cladire  $cladire
          * @return \Illuminate\Http\Response
          */
-        public function show(Cladire $cladiri)
+        public function show(Cladire $cladiri, $id)
         {
         
+            $apartamente = Apartament::with('cladiri')->where('cladiri_id',$id)->get();
+            dd($apartamente->toArray());
+            return view('pages.complex.show_complex',compact('cladiri','complex'));
         }
         
         /**

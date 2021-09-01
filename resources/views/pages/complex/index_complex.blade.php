@@ -30,12 +30,14 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $complex->nume }}</td>
                                     <td>{{ $complex->adresa }}</td>
-                                    <td>
-                                        <a href="{{ route('complexe.edit' , $complex->id) }}" class="btn btn-primary float-left">Edit</a>
+                                    <td width="25%">
+                                        <a href="{{ route('complexe.edit' , $complex->id) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ route('complexe.show' , $complex->id) }}" class="btn btn-info">Show</a>
+                                        
                                         <form action="{{ route('complexe.destroy', $complex) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger float-right">Delete</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>                                    
                                     </td>
                                 </tr>

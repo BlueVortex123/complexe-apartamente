@@ -18,7 +18,7 @@ class Cladire extends Model
 
     public function complex()
     {
-        return $this->belongsTo(Provider::class, 'complex_id');
+        return $this->belongsTo(Complex::class, 'complex_id');
     }
 
     public function apartamente()

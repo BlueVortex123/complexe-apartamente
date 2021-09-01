@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apartament;
+use App\Models\Cladire;
+use App\Models\Proprietar;
 use Illuminate\Http\Request;
 
 class ApartamentController extends Controller
@@ -15,6 +17,7 @@ class ApartamentController extends Controller
     public function index()
     {
         $apartament = Apartament::with(['cladire','proprietari'])->get();
+        return view('pages.apartamente.index_apartamente', compact($apartament));
     }
 
     /**
@@ -24,7 +27,8 @@ class ApartamentController extends Controller
      */
     public function create()
     {
-        //
+        $cladiri = Cladire::with('apartamente')->get();
+        return view('pages.apartamente.create_apartamente'. compact($cladiri));
     }
 
     /**
@@ -46,6 +50,8 @@ class ApartamentController extends Controller
             $apartamente->cladiri_id = $request->cladiri_id;
             
             $apartamente->save();
+
+            return redirect()->route('apartamente.index');
         }
         
         /**
@@ -54,7 +60,7 @@ class ApartamentController extends Controller
          * @param  \App\Models\Apartament  $apartament
          * @return \Illuminate\Http\Response
          */
-        public function show(Apartament $apartament)
+        public function show(Apartament $apartamente,$id)
         {
             //
         }
@@ -65,9 +71,12 @@ class ApartamentController extends Controller
          * @param  \App\Models\Apartament  $apartament
          * @return \Illuminate\Http\Response
          */
-        public function edit(Apartament $apartament)
+        public function edit(Apartament $apartamente)
         {
-            //
+            $cladiri = Cladire::with('apartamente')->get();
+            $proprietari = Proprietar::with('apartamente')->get();
+
+            return view('pages.apartamente.edit_apartamente'. compact('cladiri','proprietari'));
         }
         
         /**
@@ -77,7 +86,7 @@ class ApartamentController extends Controller
          * @param  \App\Models\Apartament  $apartament
          * @return \Illuminate\Http\Response
          */
-        public function update(Request $request, Apartament $apartament)
+        public function update(Request $request, Apartament $apartamente)
         {
             
             $valdiated = $request->validate([
@@ -87,20 +96,23 @@ class ApartamentController extends Controller
                 'numar_camere' => 'required',
                 ]);
 
-            $apartament->update($valdiated);
+            $apartamente->update($valdiated);
 
-            $apartament->save();
-    }
+            $apartamente->save();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Apartament  $apartament
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Apartament $apartament)
-    {
-        $apartament->delete();
+            return redirect()->route('apartamente.index');
+        }
+        
+        /**
+         * Remove the specified resource from storage.
+         *
+         * @param  \App\Models\Apartament  $apartament
+         * @return \Illuminate\Http\Response
+         */
+        public function destroy(Apartament $apartamente)
+        {
+            $apartamente->delete();
+            return redirect()->route('apartamente.index');
     }
 
 

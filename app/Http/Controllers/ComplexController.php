@@ -88,14 +88,16 @@ class ComplexController extends Controller
             'nume' => 'required|string|min:3|max:255',
             'adresa' => 'required|string|min:3|max:255',
             
-        ]);
+            ]);
+            
+            $complexe->update($validated);
+            $complexe->save();
+            
+            return redirect()->route('complexe.index');
+        }
         
-        $complexe->update($validated);
-        $complexe->save();
-    }
-
-    /**
-     * Remove the specified resource from storage.
+        /**
+         * Remove the specified resource from storage.
      *
      * @param  \App\Models\Complex  $complex
      * @return \Illuminate\Http\Response
@@ -103,23 +105,27 @@ class ComplexController extends Controller
     public function destroy(Complex $complexe)
     {
         $complexe->delete();
+
+        return redirect()->route('complexe.index');
     }
 
     public function onlyTrashedComplex()
     {
-        $complexx = Complex::onlyTrashed()->whereNotNull('deleted_at')->get();
+        $complexe = Complex::onlyTrashed()->whereNotNull('deleted_at')->get();
+        return view('pages.complex.trashed_complex',compact('complexe'));
       
     }
 
     public function restoreComplex(Request $request, $id)
     {
         Complex::onlyTrashed()->find($id)->restore();
-        
+        return redirect()->route('trashed_complex');
     }
-
+    
     public function permanentlyDeleteComplex(Request $request, $id)
     {
         Complex::onlyTrashed()->find($id)->forceDelete();
+        return redirect()->route('trashed_complex');
      
     }
 }

@@ -19,6 +19,11 @@ Route::get('/', function () {
 
 
 Route::resource('/complexe', App\Http\Controllers\ComplexController::class);
+    Route::get('pages/complex/trashed', [App\Http\Controllers\ComplexController::class, 'onlyTrashedComplex'])->name('trashed_complex');
+    Route::get('pages/complexe.restore/{id}', [App\Http\Controllers\ComplexController::class, 'restoreComplex'])->name('restore_complex');
+    Route::get('pages/complexe/permanentlyDelete/{id}', [App\Http\Controllers\ComplexController::class, 'permanentlyDeleteComplex'])->name('permanently_delete_complex');
+
+
 Route::resource('/cladiri', App\Http\Controllers\CladireController::class);
 Route::resource('/apartamente',\App\Http\Controllers\ApartamentController::class);
 Route::resource('/proprietari', \App\Http\Controllers\ProprietarController::class);

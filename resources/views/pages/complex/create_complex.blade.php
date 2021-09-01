@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row justify-content-center mb-4">
-        <h3>Adaugare nou pcomplex</h3><br>
+        <h3>Adaugare nou complex</h3><br>
     </div>
     
     <div class="row justify-content-center">

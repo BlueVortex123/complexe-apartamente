@@ -18,7 +18,7 @@ class Proprietar extends Model
         'email'
     ];
 
-    public function apartament()
+    public function apartamente()
     {
         return $this->hasMany(Apartament::class);
     }

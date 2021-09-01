@@ -14,9 +14,9 @@ class ProprietarController extends Controller
      */
     public function index()
     {
-        $proprietari = Proprietar::with('apartament')->get();
-        dd($proprietari);
-        return view('pages.proprietar.index_prorprietar',compact($proprietari));
+        // $proprietari = Proprietar::with('apartamente')->get();
+        $proprietari = Proprietar::all();
+        return view('pages.proprietar.index_proprietar',compact('proprietari'));
     }
 
     /**
@@ -26,7 +26,7 @@ class ProprietarController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.proprietar.create_proprietar');
     }
 
     /**
@@ -39,16 +39,21 @@ class ProprietarController extends Controller
     {
         $validated = $request->validate([
             'nume' => 'required|string',
-            'CNP' => 'required|string|min:13|max:13',
-            'adresa' => 'required|string|min:4|max:255',
+            'CNP' => 'required|string',
+            'adresa' => 'required|string',
             'telefon' => 'required|string|min:5|max:20',
-            'email' => 'required|email|min:5|max:13',
+            'email' => 'required|email',
         ]);
         
         $proprietar = new Proprietar($validated);
-        
-        
+        $proprietar->nume = $request->nume;
+        $proprietar->CNP = $request->CNP;
+        $proprietar->adresa = $request->adresa;
+        $proprietar->telefon = $request->telefon;
+        $proprietar->email = $request->email;
         $proprietar->save();
+
+        return redirect()->route('proprietari.index');
     }
     
     /**
@@ -68,9 +73,9 @@ class ProprietarController extends Controller
      * @param  \App\Models\Proprietar  $proprietar
      * @return \Illuminate\Http\Response
      */
-    public function edit(Proprietar $proprietar)
+    public function edit(Proprietar $proprietari)
     {
-        //
+        return view('pages.proprietar.edit_proprietar',compact('proprietari'));
     }
     
     /**
@@ -80,19 +85,20 @@ class ProprietarController extends Controller
      * @param  \App\Models\Proprietar  $proprietar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proprietar $proprietar)
+    public function update(Request $request, Proprietar $proprietari)
     {
         $validated = $request->validate([
             'nume' => 'required|string',
-            'CNP' => 'required|string|min:13|max:13',
+            'CNP' => 'required|string',
             'adresa' => 'required|string|min:4|max:255',
-            'telefon' => 'required|string|min:5|max:20',
-            'email' => 'required|email|min:5|max:13',
+            'telefon' => 'required|string',
+            'email' => 'required|email|min:5',
         ]);
         
-        $proprietar->update($validated);
+        $proprietari->update($validated);
+        $proprietari->save();
 
-        $proprietar->save();
+        return redirect()->route('proprietari.index');
     }
     
     /**
@@ -101,9 +107,10 @@ class ProprietarController extends Controller
      * @param  \App\Models\Proprietar  $proprietar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Proprietar $proprietar)
+    public function destroy(Proprietar $proprietari)
     {
-        $proprietar->delete();
+        $proprietari->delete();
+        return redirect()->route('proprietari.index');
 
     }
 

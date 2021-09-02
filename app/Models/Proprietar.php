@@ -21,6 +21,6 @@ class Proprietar extends Model
 
     public function apartamente()
     {
-        return $this->hasMany(Apartament::class);
+        return $this->hasMany(Apartament::class, 'proprietari_id');
     }
 }

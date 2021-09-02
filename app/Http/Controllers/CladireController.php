@@ -16,8 +16,10 @@ class CladireController extends Controller
      */
     public function index()
     {
-        $cladiri = Cladire::with(['complex'])->get();
-        return view('pages.cladiri.index_cladiri',compact('cladiri'));
+        $cladiri = Cladire::with('complex')->get();
+        $apartamente = Apartament::with('cladire')->get();
+      
+        return view('pages.cladiri.index_cladiri',compact('cladiri','apartamente'));
     }
 
     /**

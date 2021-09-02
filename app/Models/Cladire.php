@@ -23,6 +23,6 @@ class Cladire extends Model
 
     public function apartamente()
     {
-        return $this->hasMany(Apartament::class);
+        return $this->hasMany(Apartament::class,'cladiri_id');
     }
 }

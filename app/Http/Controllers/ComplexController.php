@@ -60,9 +60,9 @@ class ComplexController extends Controller
      * @param  \App\Models\Complex  $complex
      * @return \Illuminate\Http\Response
      */
-    public function show(Complex $complex, $id)
+    public function show($id)
     {
-      
+        $complex = Complex::find($id);
         $cladiri = Cladire::with('complex')->where('complex_id',$id)->get();
         return view('pages.complex.show_complex',compact('cladiri','complex'));
     }

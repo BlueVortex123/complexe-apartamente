@@ -64,9 +64,11 @@ class ApartamentController extends Controller
          * @param  \App\Models\Apartament  $apartament
          * @return \Illuminate\Http\Response
          */
-        public function show(Apartament $apartamente,$id)
+        public function show($id)
         {
-            //
+            $apartamente = Apartament::find($id);
+            $proprietari = Proprietar::with('apartamente')->get();
+            return view('pages.apartamente.show_apartamente', compact('apartamente','proprietari'));
         }
         
         /**
@@ -79,6 +81,8 @@ class ApartamentController extends Controller
         {
             $cladiri = Cladire::with('apartamente')->get();
             $proprietari = Proprietar::with('apartamente')->get();
+        
+
 
             return view('pages.apartamente.edit_apartamente', compact('cladiri','proprietari','apartamente'));
         }
@@ -101,6 +105,7 @@ class ApartamentController extends Controller
                 ]);
 
             $apartamente->update($valdiated);
+            $apartamente->proprietari_id = $request->proprietari_id;
             $apartamente->vedere = $request->input('vedere') ? true : false;
 
             $apartamente->save();

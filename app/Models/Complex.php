@@ -19,6 +19,6 @@ class Complex extends Model
 
     public function cladiri()
     {
-        return $this->hasMany(Cladire::class);
+        return $this->hasMany(Cladire::class,'complex_id');
     }
 }

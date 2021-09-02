@@ -63,9 +63,9 @@ class CladireController extends Controller
          * @param  \App\Models\Cladire  $cladire
          * @return \Illuminate\Http\Response
          */
-        public function show(Cladire $cladire, $id)
+        public function show($id)
         {
-        
+            $cladire = Cladire::find($id);
             $apartamente = Apartament::with('cladire')->where('cladiri_id',$id)->get();
             return view('pages.cladiri.show_cladiri',compact('cladire','apartamente'));
         }

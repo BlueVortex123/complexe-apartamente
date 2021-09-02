@@ -9,18 +9,18 @@
             </div>
             
             <div class="col-md-12">
-                <h3>Nume Cladire: {{ $cladire->nume }}</h3>
-                <h3>Numar de Etaje: {{ $cladire->numar_etaje }} </h3>
+                <h3>Numar Apartament: {{ $apartamente->numar }}</h3>
+
              
             </div>
 
             <div class="col-md-6">
                 <h3>Lista de Apartamente:</h3>
                
-                    @foreach ($apartamente as $apartament)
+                    @foreach ($proprietari as $proprietar)
                         <li>
                           
-                           <a href="{{ URL::to('apartamente/'.$apartament->id) }}">{{ $apartament->numar }}</a>  
+                           <a href="{{ URL::to('proprietari/'.$proprietar->id) }}">{{ $proprietar->nume }}</a>  
                         </li>
                         
                     @endforeach

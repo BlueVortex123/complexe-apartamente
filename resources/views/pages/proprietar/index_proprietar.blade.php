@@ -44,6 +44,7 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('proprietari.edit' , $proprietar->id) }}" class="btn btn-primary float-left">Edit</a>
+                                        <a href="{{ route('proprietari.show' , $proprietar->id) }}" class="btn btn-primary float-left">Show</a>
                                         <form action="{{ route('proprietari.destroy', $proprietar) }}" method="post">
                                         @csrf
                                         @method('DELETE')

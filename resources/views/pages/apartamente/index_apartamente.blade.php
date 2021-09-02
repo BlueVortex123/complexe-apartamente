@@ -35,7 +35,9 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $apartament->cladire->nume }}</td>
                                     <td>
-                                        -
+                                        {{-- @foreach ($apartament->proprietar as $proprietar)
+                                            <span>{{ $proprietar->nume }}</span>
+                                        @endforeach --}}
                                     </td>
                                     <td>{{ $apartament->etaj }}</td>
                                     <td>{{ $apartament->numar }}</td>
@@ -51,6 +53,7 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('apartamente.edit' , $apartament->id) }}" class="btn btn-primary float-left">Edit</a>
+                                        <a href="{{ route('apartamente.show' , $apartament->id) }}" class="btn btn-info float-left">Show</a>
                                         <form action="{{ route('apartamente.destroy', $apartament) }}" method="post">
                                         @csrf
                                         @method('DELETE')

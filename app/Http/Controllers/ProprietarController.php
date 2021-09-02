@@ -65,9 +65,9 @@ class ProprietarController extends Controller
      * @param  \App\Models\Proprietar  $proprietar
      * @return \Illuminate\Http\Response
      */
-    public function show(Proprietar $proprietar)
+    public function show(Proprietar $proprietari)
     {
-        //
+        return view('pages.proprietar.show_proprietari',compact('proprietari'));
     }
     
     /**
@@ -78,7 +78,9 @@ class ProprietarController extends Controller
      */
     public function edit(Proprietar $proprietari)
     {
-        return view('pages.proprietar.edit_proprietar',compact('proprietari'));
+        $apartamente = Apartament::with('proprietar')->get();
+
+        return view('pages.proprietar.edit_proprietar',compact('proprietari','apartamente'));
     }
     
     /**
@@ -99,6 +101,7 @@ class ProprietarController extends Controller
         ]);
         
         $proprietari->update($validated);
+        $proprietari->apartament_id = $request->apartament_id;
         $proprietari->save();
 
         return redirect()->route('proprietari.index');

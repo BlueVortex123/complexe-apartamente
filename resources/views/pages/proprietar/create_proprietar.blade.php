@@ -53,6 +53,18 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <h5>Apartament</h5>
+                    <div class="controls">
+                        <select name="proprietari_id" class="form-control">
+                            <option value="" selected="" disabled="">Selecteaza apartamentul</option>
+                            @foreach($apartamente as $apartament)
+                            <option value="{{ $apartament->id }}">{{ $apartament->numar }}</option>
+                            @endforeach
+                        </select>                                    
+                    </div>
+                </div>   
+
                 <div class="text-xs-right">
                     <input type="submit" value="Submit" class="btn btn-rounded btn-info md-5">
                 </div>

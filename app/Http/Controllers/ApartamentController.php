@@ -80,7 +80,7 @@ class ApartamentController extends Controller
             $cladiri = Cladire::with('apartamente')->get();
             $proprietari = Proprietar::with('apartamente')->get();
 
-            return view('pages.apartamente.edit_apartamente'. compact('cladiri','proprietari'));
+            return view('pages.apartamente.edit_apartamente', compact('cladiri','proprietari','apartamente'));
         }
         
         /**
@@ -101,6 +101,7 @@ class ApartamentController extends Controller
                 ]);
 
             $apartamente->update($valdiated);
+            $apartamente->vedere = $request->input('vedere') ? true : false;
 
             $apartamente->save();
 

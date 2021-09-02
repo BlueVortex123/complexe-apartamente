@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apartament;
 use App\Models\Proprietar;
 use Illuminate\Http\Request;
 
@@ -14,19 +15,21 @@ class ProprietarController extends Controller
      */
     public function index()
     {
-        // $proprietari = Proprietar::with('apartamente')->get();
-        $proprietari = Proprietar::all();
-        return view('pages.proprietar.index_proprietar',compact('proprietari'));
+        $proprietari = Proprietar::with('apartamente')->get();
+        $apartamente = Apartament::with('proprietar')->get();
+ 
+        return view('pages.proprietar.index_proprietar',compact('proprietari','apartamente'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource.apar
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('pages.proprietar.create_proprietar');
+        $apartamente = Apartament::with('proprietar')->get();
+        return view('pages.proprietar.create_proprietar',compact('apartamente'));
     }
 
     /**

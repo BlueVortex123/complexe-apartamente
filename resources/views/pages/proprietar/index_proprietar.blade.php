@@ -24,6 +24,7 @@
                                     <th>Adresa</th>
                                     <th>Telefon</th>
                                     <th>Email</th>
+                                    <th>Numar Apartament</th>
                                     <th width="20%">Actiune</th>
                                 </tr>
                             </thead>
@@ -36,6 +37,11 @@
                                     <td>{{ $proprietar->adresa }}</td>
                                     <td>{{ $proprietar->telefon }}</td>
                                     <td>{{ $proprietar->email }}</td>
+                                    <td>
+                                        @foreach ($proprietar->apartamente as $apartament)
+                                            <span>{{ $apartament->numar }}</span>
+                                        @endforeach
+                                    </td>
                                     <td>
                                         <a href="{{ route('proprietari.edit' , $proprietar->id) }}" class="btn btn-primary float-left">Edit</a>
                                         <form action="{{ route('proprietari.destroy', $proprietar) }}" method="post">

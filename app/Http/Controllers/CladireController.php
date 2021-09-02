@@ -115,21 +115,24 @@ class CladireController extends Controller
         return redirect()->route('cladiri.index');
     }
 
-    public function onlyTrashedCladiri()
+    public function onlyTrashedCladire()
     {
-        $cladire = Cladire::onlyTrashed()->whereNotNull('deleted_at')->get();
+        $cladiri = Cladire::onlyTrashed()->whereNotNull('deleted_at')->get();
+        return view('pages.cladiri.trashed_cladiri',compact('cladiri'));
       
     }
 
-    public function restoreCladiri(Request $request, $id)
+    public function restoreCladire(Request $request, $id)
     {
         Cladire::onlyTrashed()->find($id)->restore();
+        return redirect()->route('trashed_cladiri');
         
     }
-
-    public function permanentlyDeleteCladiri(Request $request, $id)
+    
+    public function permanentlyDeleteCladire(Request $request, $id)
     {
         Cladire::onlyTrashed()->find($id)->forceDelete();
+        return redirect()->route('trashed_cladiri');
      
     }
 

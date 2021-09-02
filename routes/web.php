@@ -24,10 +24,18 @@ Route::resource('/complexe', App\Http\Controllers\ComplexController::class);
     Route::get('pages/complexe/permanentlyDelete/{id}', [App\Http\Controllers\ComplexController::class, 'permanentlyDeleteComplex'])->name('permanently_delete_complex');
     
     
-    Route::resource('/cladiri', App\Http\Controllers\CladireController::class);
-    Route::resource('/apartamente',App\Http\Controllers\ApartamentController::class);
+Route::resource('/cladiri', App\Http\Controllers\CladireController::class);
+    Route::get('pages/cladiri/trashed', [App\Http\Controllers\CladireController::class, 'onlyTrashedCladire'])->name('trashed_cladiri');
+    Route::get('pages/cladiri.restore/{id}', [App\Http\Controllers\CladireController::class, 'restoreCladire'])->name('restore_cladire');
+    Route::get('pages/cladire/permanentlyDelete/{id}', [App\Http\Controllers\CladireController::class, 'permanentlyDeleteCladire'])->name('permanently_delete_cladire');
 
-    Route::resource('/proprietari', App\Http\Controllers\ProprietarController::class);
-        Route::get('pages/proprietar/trashed', [App\Http\Controllers\ProprietarController::class, 'onlyTrashedProprietar'])->name('trashed_proprietar');
-        Route::get('pages/proprietari.restore/{id}', [App\Http\Controllers\ProprietarController::class, 'restoreProprietar'])->name('restore_proprietar');
-        Route::get('pages/proprietar /permanentlyDelete/{id}', [App\Http\Controllers\ProprietarController::class, 'permanentlyDeleteProprietar'])->name('permanently_delete_proprietar');
+
+Route::resource('/apartamente',App\Http\Controllers\ApartamentController::class);
+    Route::get('pages/apartamente/trashed', [App\Http\Controllers\ApartamentController::class, 'onlyTrashedApartament'])->name('trashed_apartamente');
+    Route::get('pages/apartamente.restore/{id}', [App\Http\Controllers\ApartamentController::class, 'restoreApartament'])->name('restore_apartament');
+    Route::get('pages/apartament/permanentlyDelete/{id}', [App\Http\Controllers\ApartamentController::class, 'permanentlyDeleteApartament'])->name('permanently_delete_apartament');
+
+Route::resource('/proprietari', App\Http\Controllers\ProprietarController::class);
+    Route::get('pages/proprietari/trashed', [App\Http\Controllers\ProprietarController::class, 'onlyTrashedProprietar'])->name('trashed_proprietar');
+    Route::get('pages/proprietari.restore/{id}', [App\Http\Controllers\ProprietarController::class, 'restoreProprietar'])->name('restore_proprietar');
+    Route::get('pages/proprietar/permanentlyDelete/{id}', [App\Http\Controllers\ProprietarController::class, 'permanentlyDeleteProprietar'])->name('permanently_delete_proprietar');

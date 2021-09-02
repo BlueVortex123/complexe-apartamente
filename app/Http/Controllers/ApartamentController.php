@@ -122,19 +122,22 @@ class ApartamentController extends Controller
 
     public function onlyTrashedApartament()
     {
-        $apartament = Apartament::onlyTrashed()->whereNotNull('deleted_at')->get();
+        $apartamente = Apartament::onlyTrashed()->whereNotNull('deleted_at')->get();
+        return view('pages.apartamente.trashed_apartamente',compact('apartamente'));
       
     }
 
     public function restoreApartament(Request $request, $id)
     {
         Apartament::onlyTrashed()->find($id)->restore();
+        return redirect()->route('trashed_apartamente');
         
     }
-
+    
     public function permanentlyDeleteApartament(Request $request, $id)
     {
         Apartament::onlyTrashed()->find($id)->forceDelete();
+        return redirect()->route('trashed_apartamente');
      
     }
 }

@@ -19,6 +19,7 @@ class ApartamentController extends Controller
         $apartamente = Apartament::with('cladire')->get();
         $cladiri = Cladire::with('apartamente')->get();
         $proprietari = Proprietar::with('apartamente')->get();
+
     
         return view('pages.apartamente.index_apartamente', compact('apartamente','proprietari','cladiri'));
     }
@@ -66,8 +67,13 @@ class ApartamentController extends Controller
          */
         public function show($id)
         {
-            $apartamente = Apartament::find($id);
+            $apartamente = Apartament::with('proprietar')->find($id);
+            
             $proprietari = Proprietar::with('apartamente')->get();
+            
+            //
+            
+            // dd($apartamente->toArray());
             return view('pages.apartamente.show_apartamente', compact('apartamente','proprietari'));
         }
         
@@ -80,6 +86,7 @@ class ApartamentController extends Controller
         public function edit(Apartament $apartamente)
         {
             $cladiri = Cladire::with('apartamente')->get();
+            
             $proprietari = Proprietar::with('apartamente')->get();
         
 

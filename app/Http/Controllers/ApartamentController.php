@@ -16,10 +16,11 @@ class ApartamentController extends Controller
      */
     public function index()
     {
-        $apartamente = Apartament::with(['cladire','proprietar'])->get();
-        $proprietari = Proprietar::with(['apartamente'])->get();
+        $apartamente = Apartament::with('cladire')->get();
+        $cladiri = Cladire::with('apartamente')->get();
+        $proprietari = Proprietar::with('apartamente')->get();
     
-        return view('pages.apartamente.index_apartamente', compact('apartamente','proprietari'));
+        return view('pages.apartamente.index_apartamente', compact('apartamente','proprietari','cladiri'));
     }
 
     /**
@@ -30,7 +31,7 @@ class ApartamentController extends Controller
     public function create()
     {
         $cladiri = Cladire::with('apartamente')->get();
-        return view('pages.apartamente.create_apartamente'. compact('cladiri'));
+        return view('pages.apartamente.create_apartamente', compact('cladiri'));
     }
 
     /**
@@ -50,6 +51,7 @@ class ApartamentController extends Controller
             
             $apartamente = new Apartament($valdiated);
             $apartamente->cladiri_id = $request->cladiri_id;
+            $apartamente->vedere = $request->input('vedere') ? true : false;
             
             $apartamente->save();
 

@@ -34,16 +34,17 @@
                                     <td>{{ $cladire->nume }}</td>
                                     <td>{{ $cladire->numar_etaje }}</td>
                                     <td>
-                                        @foreach ($apartamente as $apartament)
-                                            <span>{{ $apartamente->count() }}</span>
-                                        @endforeach
+                                        
+                                           -
+                                 
                                     </td>
                                     <td>
-                                        <a href="{{ route('cladiri.edit' , $cladire->id) }}" class="btn btn-primary float-left">Edit</a>
-                                        <form action="{{ route('proprietari.destroy', $cladire) }}" method="post">
+                                        <a href="{{ route('cladiri.edit' , $cladire->id) }}" class="btn btn-primary ">Edit</a>
+                                        <a href="{{ route('cladiri.show' , $cladire->id) }}" class="btn btn-info">Show</a>
+                                        <form action="{{ route('cladiri.destroy', $cladire) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                            <button type="submit" class="btn btn-danger float-right">Delete</button>
+                                            <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>                                    
                                     </td>
                                 </tr>

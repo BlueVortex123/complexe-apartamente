@@ -18,7 +18,8 @@ class CladireController extends Controller
     {
         $cladiri = Cladire::with('complex')->get();
         $apartamente = Apartament::with('cladire')->get();
-      
+       
+       
         return view('pages.cladiri.index_cladiri',compact('cladiri','apartamente'));
     }
 
@@ -59,12 +60,11 @@ class CladireController extends Controller
          * @param  \App\Models\Cladire  $cladire
          * @return \Illuminate\Http\Response
          */
-        public function show(Cladire $cladiri, $id)
+        public function show(Cladire $cladire, $id)
         {
         
-            $apartamente = Apartament::with('cladiri')->where('cladiri_id',$id)->get();
-            dd($apartamente->toArray());
-            return view('pages.complex.show_complex',compact('cladiri','complex'));
+            $apartamente = Apartament::with('cladire')->where('cladiri_id',$id)->get();
+            return view('pages.cladiri.show_cladiri',compact('cladire','apartamente'));
         }
         
         /**

@@ -61,6 +61,18 @@
                     <input type="checkbox" name="vedere"  class="form-check-input float-md-right ">Da<br>                                                               
                 </div>
 
+                 <div class="form-group">
+                    <h5>Proprietar</h5>
+                    <div class="controls">
+                        <select name="proprietari_id" class="form-control">
+                            <option value="apartamente_id" selected="" disabled="">Selecteaza Proprietarul</option>
+                            @foreach($proprietari as $proprietar)
+                            <option value="{{ $proprietar->id }}">{{ $proprietar->nume }}</option>
+                            @endforeach
+                        </select>                                    
+                    </div>
+                </div>   
+
                 <div class="text-xs-right">
                     <input type="submit" value="Submit" class="btn btn-rounded btn-info md-5">
                 </div>

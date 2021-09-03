@@ -62,17 +62,30 @@
                     <input type="checkbox" name="vedere" {{ ($apartamente->vedere == 1)? 'checked' : '' }}  class="form-check-input float-md-right ">Da<br>                                                               
                 </div>
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <h5>Proprietar: </h5>
                     <div class="controls">
                         <select name="proprietari_id" class="form-control">
-                            <option value="" selected="" disabled="">Selecteaza proprietarul</option>
                             @foreach($proprietari as $proprietar)
-                            <option value="{{ $proprietar->id }}"  {{ ($apartamente->proprietar_id == $proprietar->id)? "selected": "" }}>{{ $proprietar->nume }}</option>
+                                <option value="{{ $proprietar->id }}"  {{ ($apartamente->proprietar_id == $proprietar->id)? "selected": "" }}>{{ $proprietar->nume }}</option>
                             @endforeach
                         </select>                                    
                     </div>
-                </div>   
+                </div>    --}}
+
+                <div class="form-group">
+                    <label for='proprietari_id'>Category</label>
+                    <select id="proprietari_id" class="custom-select @error('proprietari_id') is-invalid @enderror" autocomplete="proprietari_id" autofocus name="proprietari_id">
+                        @foreach ($proprietari as $proprietar)
+                            <option value="{{ $proprietar->id }}" {{ old('proprietari_id', $apartamente->proprietari_id) == $proprietar->id?'selected':''}}>{{ $proprietar->nume }}</option>
+                        @endforeach
+                    </select>
+                    @error('proprietari_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
                 <div class="text-xs-right">
                     <input type="submit" value="Submit" class="btn btn-rounded btn-info md-5">

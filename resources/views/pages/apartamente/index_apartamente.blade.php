@@ -53,7 +53,7 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('apartamente.edit' , $apartament->id) }}" class="btn btn-primary float-left">Edit</a>
-                                        <a href="{{ route('apartamente.show' , $apartament->id) }}" class="btn btn-info float-left">Show</a>
+                                        <a href="{{ route('apartamente.show' , $apartament) }}" class="btn btn-info float-left">Show</a>
                                         <form action="{{ route('apartamente.destroy', $apartament) }}" method="post">
                                         @csrf
                                         @method('DELETE')

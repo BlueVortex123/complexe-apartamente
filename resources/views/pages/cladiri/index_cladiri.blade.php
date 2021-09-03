@@ -34,7 +34,7 @@
                                     <td>{{ $cladire->nume }}</td>
                                     <td>{{ $cladire->numar_etaje }}</td>
                                     <td>
-                                        -
+                                        {{ count($cladire->apartamente) }}
                                     </td>
                                     <td>
                                         <a href="{{ route('cladiri.edit' , $cladire->id) }}" class="btn btn-primary ">Edit</a>

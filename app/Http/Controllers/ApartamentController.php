@@ -32,7 +32,8 @@ class ApartamentController extends Controller
     public function create()
     {
         $cladiri = Cladire::with('apartamente')->get();
-        return view('pages.apartamente.create_apartamente', compact('cladiri'));
+        $proprietari = Proprietar::with('apartamente')->get();
+        return view('pages.apartamente.create_apartamente', compact('cladiri','proprietari'));
     }
 
     /**
@@ -48,6 +49,7 @@ class ApartamentController extends Controller
             'numar' => 'required',
             'suprafata' => 'required',
             'numar_camere' => 'required',
+            'proprietari_id' => 'exists:proprietari,id|nullable'
             ]);
             
             $apartamente = new Apartament($valdiated);
@@ -67,14 +69,8 @@ class ApartamentController extends Controller
          */
         public function show($id)
         {
-            $apartamente = Apartament::with('proprietar')->find($id);
-            
-            $proprietari = Proprietar::with('apartamente')->get();
-            
-            //
-            
-            // dd($apartamente->toArray());
-            return view('pages.apartamente.show_apartamente', compact('apartamente','proprietari'));
+            $apartament = Apartament::findOrFail($id);
+            return view('pages.apartamente.show_apartamente', compact('apartament'));
         }
         
         /**
@@ -109,6 +105,7 @@ class ApartamentController extends Controller
                 'numar' => 'required',
                 'suprafata' => 'required',
                 'numar_camere' => 'required',
+                'proprietari_id' => 'exists:proprietari,id|nullable'
                 ]);
 
             $apartamente->update($valdiated);

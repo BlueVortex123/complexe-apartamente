@@ -29,7 +29,8 @@ class ProprietarController extends Controller
     public function create()
     {
         $apartamente = Apartament::with('proprietar')->get();
-        return view('pages.proprietar.create_proprietar',compact('apartamente'));
+        $proprietari = Proprietar::with('apartamente')->get();
+        return view('pages.proprietar.create_proprietar',compact('apartamente','proprietari'));
     }
 
     /**
@@ -49,11 +50,6 @@ class ProprietarController extends Controller
         ]);
         
         $proprietar = new Proprietar($validated);
-        $proprietar->nume = $request->nume;
-        $proprietar->CNP = $request->CNP;
-        $proprietar->adresa = $request->adresa;
-        $proprietar->telefon = $request->telefon;
-        $proprietar->email = $request->email;
         $proprietar->save();
 
         return redirect()->route('proprietari.index');

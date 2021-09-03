@@ -34,11 +34,7 @@
                                     @foreach($apartamente as $key => $apartament )
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $apartament->cladire->nume }}</td>
-                                    <td>
-                                        {{-- @foreach ($apartament->proprietar as $proprietar)
-                                            <span>{{ $proprietar->nume }}</span>
-                                        @endforeach --}}
-                                    </td>
+                                    <td>{{ $apartament->proprietar->nume ?? '-Fara proprietar-' }}</td>
                                     <td>{{ $apartament->etaj }}</td>
                                     <td>{{ $apartament->numar }}</td>
                                     <td>{{ $apartament->suprafata }}</td>

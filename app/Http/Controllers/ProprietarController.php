@@ -50,6 +50,11 @@ class ProprietarController extends Controller
         ]);
         
         $proprietar = new Proprietar($validated);
+        $apartamente = Apartament::all();
+
+        $proprietar->apartament_id = $request->apartament_id;
+        // $proprietar->apartamente()->save($apartamente);
+
         $proprietar->save();
 
         return redirect()->route('proprietari.index');
@@ -61,9 +66,12 @@ class ProprietarController extends Controller
      * @param  \App\Models\Proprietar  $proprietar
      * @return \Illuminate\Http\Response
      */
-    public function show(Proprietar $proprietari)
+    public function show($id)
     {
-        return view('pages.proprietar.show_proprietari',compact('proprietari'));
+        $proprietari = Proprietar::with('apartamente')->find($id);
+        $apartamente = Apartament::with('proprietar')->where('proprietari_id',$id)->get();
+        
+        return view('pages.proprietar.show_proprietari',compact('proprietari','apartamente'));
     }
     
     /**
@@ -76,7 +84,15 @@ class ProprietarController extends Controller
     {
         $apartamente = Apartament::with('proprietar')->get();
 
-        return view('pages.proprietar.edit_proprietar',compact('proprietari','apartamente'));
+        $selected_apartamente = [];
+        foreach ($proprietari->apartamente as $apartamente_prop)
+        {
+            array_push($selected_apartamente, $apartamente_prop->id);
+        }
+
+        
+
+        return view('pages.proprietar.edit_proprietar',compact('proprietari','apartamente','selected_apartamente'));
     }
     
     /**
@@ -94,12 +110,21 @@ class ProprietarController extends Controller
             'adresa' => 'required|string|min:4|max:255',
             'telefon' => 'required|string',
             'email' => 'required|email|min:5',
-        ]);
-        
-        $proprietari->update($validated);
-        $proprietari->apartament_id = $request->apartament_id;
-        $proprietari->save();
+            ]);
+           
+            $proprietari->update($validated);
+            
+            $proprietari = Proprietar::with('apartamente')->find($proprietari)->first();
+            $apartamente = Apartament::with('proprietar')->get();
 
+                
+            $apartamente->update(['proprietari_id' => $proprietari->id]);
+            dd($proprietari->toArray(), $apartamente->toArray());
+
+            
+            $proprietari->save();
+
+        
         return redirect()->route('proprietari.index');
     }
     

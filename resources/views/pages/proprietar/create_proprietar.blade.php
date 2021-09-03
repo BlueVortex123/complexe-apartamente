@@ -53,6 +53,17 @@
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for='products'>
+                        <h5>Apartamente<span class="text-danger">*</span></h5>
+                    </label>
+                    <select id="apartamente" class="custom-select @error('apartamente') is-invalid @enderror" autocomplete="apartamente" autofocus name="apartamente[]" multiple>
+                        @foreach ($apartamente as $apartament)
+                            <option value="{{$apartament->id}}"> {{$apartament->numar}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 
 
                 <div class="text-xs-right">

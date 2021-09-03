@@ -67,7 +67,7 @@
                         <select name="proprietari_id" class="form-control">
                             <option value="apartamente_id" selected="" disabled="">Selecteaza Proprietarul</option>
                             @foreach($proprietari as $proprietar)
-                            <option value="{{ $proprietar->id }}">{{ $proprietar->nume }}</option>
+                                <option value="{{ $proprietar->id }}">{{ $proprietar->nume }}</option>
                             @endforeach
                         </select>                                    
                     </div>

@@ -46,14 +46,19 @@
                 <div class="form-group">
                     <h5> Suprafata <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" name="suprafata" value="{{ $apartamente->suprafata }}" class="form-control" required="">
+                        <input type="text" name="suprafata"  value="{{ $apartamente->suprafata }}" class="form-control" required="">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <h5> Numar de Camere <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" name="numar_camere" value="{{$apartamente->numar_camere}}" class="form-control" required="">
+                        <input type="text" name="numar_camere" @error('numar_camere') is-invalid @enderror value="{{$apartamente->numar_camere}}" class="form-control" required="">
+                        @error('numar_camere')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     </div>
                 </div>
 

@@ -9,8 +9,9 @@
     
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form method="post" action="{{ route('cladiri.store') }}">
+            <form method="post" action="{{ route('cladiri.update', $cladiri) }}">
                 @csrf
+                @method('PUT')
 
                 <div class="form-group">
                     <a href="{{ route('cladiri.index') }}" class="btn btn-rounded btn-primary mb-5">Inapoi</a>

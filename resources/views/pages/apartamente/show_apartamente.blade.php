@@ -18,7 +18,7 @@
                 <h3>Lista de Apartamente:</h3>
                
                 <ul>
-                    <li>{{ $apartament->proprietar->nume }}</li>
+                    <a href="{{ URL::to('proprietari/'.$apartament->proprietar->id) }}">{{ $apartament->proprietar->nume }}</a>  
                 </ul>
              
             </div>  

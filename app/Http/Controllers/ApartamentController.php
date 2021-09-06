@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Apartament\StoreApartamentRequest;
+use App\Http\Requests\Apartament\UpdateApartamentRequest;
 use App\Models\Apartament;
 use App\Models\Cladire;
 use App\Models\Proprietar;
@@ -41,17 +43,13 @@ class ApartamentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreApartamentRequest $request)
     {
         $valdiated = $request->validate([
-            'etaj' => 'required|min:1|max:2',
-            'numar' => 'required|min:1|max:100',
-            'suprafata' => 'required',
-            'numar_camere' => 'required|min:1|max:3',
-            'proprietari_id' => 'exists:proprietari,id|nullable'
+            
             ]);
             
-            $apartamente = new Apartament($valdiated);
+            $apartamente = Apartament::create($request->validated());
             $apartamente->cladiri_id = $request->cladiri_id;
             $apartamente->vedere = $request->input('vedere') ? true : false;
             
@@ -95,18 +93,11 @@ class ApartamentController extends Controller
          * @param  \App\Models\Apartament  $apartament
          * @return \Illuminate\Http\Response
          */
-        public function update(Request $request, Apartament $apartamente)
+        public function update(UpdateApartamentRequest $request, Apartament $apartamente)
         {
             
-            $valdiated = $request->validate([
-                'etaj' => 'required|min:1|max:2',
-                'numar' => 'required|min:1|max:100',
-                'suprafata' => 'required',
-                'numar_camere' => 'required|min:1|max:3',
-                'proprietari_id' => 'exists:proprietari,id|nullable'
-                ]);
 
-            $apartamente->update($valdiated);
+            $apartamente->update($request->validated());
             $apartamente->proprietari_id = $request->proprietari_id;
             $apartamente->vedere = $request->input('vedere') ? true : false;
 

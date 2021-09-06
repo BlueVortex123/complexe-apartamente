@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Proprietar\StoreProprietarRequest;
+use App\Http\Requests\Proprietar\UpdateProprietarRequest;
 use App\Models\Apartament;
 use App\Models\Proprietar;
 use Illuminate\Http\Request;
@@ -39,21 +41,14 @@ class ProprietarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProprietarRequest $request)
     {
-        $validated = $request->validate([
-            'nume' => 'required|string|min:3|max:255',
-            'CNP' => 'required|string|min:9',
-            'adresa' => 'required|string|min:4|max:255',
-            'telefon' => 'required|string|min:5',
-            'email' => 'required|email|min:5',
-        ]);
+    
+        $proprietar = Proprietar::create($request->validated());
         
-        $proprietar = new Proprietar($validated);
-        $apartamente = Apartament::all();
 
-        $proprietar->apartament_id = $request->apartament_id;
-        // $proprietar->apartamente()->save($apartamente);
+        $proprietar->apartamente_id = $request->apartamente_id;
+
 
         $proprietar->save();
 
@@ -99,18 +94,10 @@ class ProprietarController extends Controller
      * @param  \App\Models\Proprietar  $proprietar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proprietar $proprietari)
+    public function update(UpdateProprietarRequest $request, Proprietar $proprietari)
     {
-
-        $validated = $request->validate([
-            'nume' => 'required|string|min:3|max:255',
-            'CNP' => 'required|string|min:9',
-            'adresa' => 'required|string|min:4|max:255',
-            'telefon' => 'required|string|min:5',
-            'email' => 'required|email|min:5',
-            ]);
            
-            $proprietari->update($validated);
+            $proprietari->update($request->validated());
             $proprietari->save();
             
             $apartmente = Apartament::whereNotIn('id', (request('apartamente')) ? request('apartamente') : [])->where('proprietari_id', $proprietari->id)->update(['proprietari_id' => null]);

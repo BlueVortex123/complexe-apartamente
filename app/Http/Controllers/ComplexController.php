@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Complex\StoreComplexRequest;
+use App\Http\Requests\Complex\UpdateComplexRequest;
 use App\Models\Cladire;
 use App\Models\Complex;
 use Illuminate\Http\Request;
@@ -36,15 +38,10 @@ class ComplexController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreComplexRequest $request)
     {
-        $validated = $request->validate([
-            'nume' => 'required|string|min:3|max:255',
-            'adresa' => 'required|string|min:3|max:255',
-            
-        ]);
-        
-        $complex = new Complex($validated);
+       
+        $complex = Complex::create($request->validated());
         $complex->nume = $request->nume;
         $complex->adresa = $request->adresa;
         $complex->save();
@@ -85,15 +82,10 @@ class ComplexController extends Controller
      * @param  \App\Models\Complex  $complex
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Complex $complexe)
+    public function update(UpdateComplexRequest $request, Complex $complexe)
     {
-        $validated = $request->validate([
-            'nume' => 'required|string|min:3|max:255',
-            'adresa' => 'required|string|min:3|max:255',
-            
-            ]);
-            
-            $complexe->update($validated);
+       
+            $complexe->update($request->validated());
             $complexe->save();
             
             return redirect()->route('complexe.index');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Cladire\StoreCladireRequest;
+use App\Http\Requests\Cladire\UpdateCladireRequest;
 use App\Models\Apartament;
 use App\Models\Cladire;
 use App\Models\Complex;
@@ -43,14 +45,11 @@ class CladireController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCladireRequest $request)
     {
-        $validated = $request->validate([
-            'nume' => 'required|string|min:3|max:100',
-            'numar_etaje' => 'required|string|min:1|max:2',
-            ]);
-            
-            $cladire = new Cladire($validated);
+       
+    
+            $cladire =  Cladire::create($request->validated());
             $cladire->complex_id = $request->complex_id;
             $cladire->save();
             
@@ -91,14 +90,11 @@ class CladireController extends Controller
          * @param  \App\Models\Cladire  $cladire
          * @return \Illuminate\Http\Response
          */
-    public function update(Request $request, Cladire $cladiri)
+    public function update(UpdateCladireRequest $request, Cladire $cladiri)
     {
-        $validated = $request->validate([
-            'nume' => 'required|string|min:3|max:255',
-            'numar_etaje' => 'required|string|min:1|max:2',
-        ]);
+      
         
-        $cladiri->update($validated);
+        $cladiri->update($request->validated());
         $cladiri->complex_id = $request->complex_id;
         $cladiri->save();
 

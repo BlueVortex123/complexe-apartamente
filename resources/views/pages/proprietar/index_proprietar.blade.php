@@ -24,7 +24,9 @@
                                     <th>Adresa</th>
                                     <th>Telefon</th>
                                     <th>Email</th>
+                                    @role('admin')
                                     <th>Numar Apartament</th>
+                                    @endrole
                                     <th width="20%">Actiune</th>
                                 </tr>
                             </thead>
@@ -37,11 +39,13 @@
                                     <td>{{ $proprietar->adresa }}</td>
                                     <td>{{ $proprietar->telefon }}</td>
                                     <td>{{ $proprietar->email }}</td>
+                                    @role('admin')
                                     <td>
                                         @foreach ($proprietar->apartamente as $apartament)
                                             <span>{{ $apartament->numar }}</span>
                                         @endforeach
                                     </td>
+                                    @endrole
                                     <td>
                                         <a href="{{ route('proprietari.edit' , $proprietar->id) }}" class="btn btn-primary float-left">Edit</a>
                                         <a href="{{ route('proprietari.show' , $proprietar->id) }}" class="btn btn-primary float-left">Show</a>

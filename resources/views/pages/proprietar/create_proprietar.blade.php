@@ -78,7 +78,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for='products'>
                         <h5>Apartamente<span class="text-danger">*</span></h5>
                     </label>
@@ -87,7 +87,7 @@
                             <option value="{{$apartament->id}}"> {{$apartament->numar}}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
                 
 

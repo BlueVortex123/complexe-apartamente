@@ -45,10 +45,6 @@ class ProprietarController extends Controller
     {
     
         $proprietar = Proprietar::create($request->validated());
-        
-
-        $proprietar->apartamente_id = $request->apartamente_id;
-
 
         $proprietar->save();
 

@@ -20,9 +20,9 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Numele Cladirii</th>
+                                    <th>Numar Apartament</th>
                                     <th>Nume Proprietar</th>
                                     <th>Etaj</th>
-                                    <th>Numar Apartament</th>
                                     <th>Suprafata m2</th>
                                     <th>Numar camere</th>
                                     <th>Vedere la mare</th>
@@ -34,9 +34,9 @@
                                     @foreach($apartamente as $key => $apartament )
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $apartament->cladire->nume }}</td>
+                                    <td>{{ $apartament->numar }}</td>
                                     <td>{{ $apartament->proprietar->nume ?? '-Fara proprietar-' }}</td>
                                     <td>{{ $apartament->etaj }}</td>
-                                    <td>{{ $apartament->numar }}</td>
                                     <td>{{ $apartament->suprafata }}</td>
                                     <td>{{ $apartament->numar_camere }}</td>
                                     <td>

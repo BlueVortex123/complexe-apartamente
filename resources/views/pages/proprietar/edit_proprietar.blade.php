@@ -20,29 +20,51 @@
                 <div class="form-group">
                     <h5> Nume <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" name="nume" value="{{ $proprietari->nume }}" class="form-control" required="">
-                        
+                        <input type="text" name="nume" value="{{ $proprietari->nume }}" class="form-control @error('nume') is-invalid @enderror" required="">
+                        @error('nume')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                  
                     </div>
                 </div>
 
                 <div class="form-group">
                     <h5> CNP <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" name="CNP" value="{{ $proprietari->CNP }}" class="form-control" required="">
+                        <input type="text" name="CNP" value="{{ $proprietari->CNP }}" class="form-control @error('CNP') is-invalid @enderror" required="">
+                        @error('CNP')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                       
                     </div>
                 </div>
 
                 <div class="form-group">
                     <h5> Adresa <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" name="adresa" value="{{ $proprietari->adresa }}" class="form-control" required="">
+                        <input type="text" name="adresa" value="{{ $proprietari->adresa }}" class="form-control @error('adresa') is-invalid @enderror" required="">
+                        @error('adresa')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                        
                     </div>
                 </div>
 
                 <div class="form-group">
                     <h5> Telefon <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" name="telefon" value="{{ $proprietari->telefon }}" class="form-control" required="">
+                        <input type="text" name="telefon" value="{{ $proprietari->telefon }}" class="form-control @error('telefon') is-invalid @enderror" required="">
+                        @error('telefon')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     </div>
                 </div>
 
@@ -50,7 +72,12 @@
                 <div class="form-group">
                     <h5>Email <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="email" name="email" value="{{ $proprietari->email }}" class="form-control"  required="">
+                        <input type="email" name="email" value="{{ $proprietari->email }}" class="form-control @error('email') is-invalid @enderror"  required="">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     </div>
                 </div>
 

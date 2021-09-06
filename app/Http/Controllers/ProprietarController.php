@@ -42,11 +42,11 @@ class ProprietarController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nume' => 'required|string',
-            'CNP' => 'required|string',
-            'adresa' => 'required|string',
-            'telefon' => 'required|string|min:5|max:20',
-            'email' => 'required|email',
+            'nume' => 'required|string|min:3|max:255',
+            'CNP' => 'required|string|min:9',
+            'adresa' => 'required|string|min:4|max:255',
+            'telefon' => 'required|string|min:5',
+            'email' => 'required|email|min:5',
         ]);
         
         $proprietar = new Proprietar($validated);
@@ -85,12 +85,13 @@ class ProprietarController extends Controller
         $apartamente = Apartament::with('proprietar')->get();
 
         $selected_apartamente = [];
+
         foreach ($proprietari->apartamente as $apartamente_prop)
         {
             array_push($selected_apartamente, $apartamente_prop->id);
         }
 
-        
+      
 
         return view('pages.proprietar.edit_proprietar',compact('proprietari','apartamente','selected_apartamente'));
     }
@@ -104,28 +105,23 @@ class ProprietarController extends Controller
      */
     public function update(Request $request, Proprietar $proprietari)
     {
+
         $validated = $request->validate([
-            'nume' => 'required|string',
-            'CNP' => 'required|string',
+            'nume' => 'required|string|min:3|max:255',
+            'CNP' => 'required|string|min:9',
             'adresa' => 'required|string|min:4|max:255',
-            'telefon' => 'required|string',
+            'telefon' => 'required|string|min:5',
             'email' => 'required|email|min:5',
             ]);
            
             $proprietari->update($validated);
-            
-            $proprietari = Proprietar::with('apartamente')->find($proprietari)->first();
-            $apartamente = Apartament::with('proprietar')->get();
-
-                
-            $apartamente->update(['proprietari_id' => $proprietari->id]);
-            dd($proprietari->toArray(), $apartamente->toArray());
-
-            
             $proprietari->save();
+            
+            $apartmente = Apartament::whereNotIn('id', (request('apartamente')) ? request('apartamente') : [])->where('proprietari_id', $proprietari->id)->update(['proprietari_id' => null]);
 
+            // dd($proprietari->toArray());
         
-        return redirect()->route('proprietari.index');
+            return redirect()->route('proprietari.index');
     }
     
     /**

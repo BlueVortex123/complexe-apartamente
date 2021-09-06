@@ -85,10 +85,14 @@
                     <label for='products'>
                         <h5>Apartamente<span class="text-danger">*</span></h5>
                     </label>
-                    <select id="apartamente" class="custom-select @error('apartamente') is-invalid @enderror" autocomplete="apartamente" autofocus name="apartamente[]" multiple>
-                        @foreach ($apartamente as $apartament)
-                            <option value="{{$apartament->id}}" {{ in_array($apartament->id,$selected_apartamente)?'selected':''}}> {{$apartament->numar}}</option>
-                        @endforeach
+                    @if (count($proprietari->apartamente))
+                        <select id="apartamente" class="custom-select @error('apartamente') is-invalid @enderror" autocomplete="apartamente" autofocus name="apartamente[]" multiple>
+                            @foreach ($proprietari->apartamente as $apartament)
+                                <option value="{{ $apartament->id }}" {{ in_array($apartament->id, $selectedApartments) ? 'selected' : ''}}>{{ $apartament->numar }}</option>
+
+                            @endforeach
+                    @endif
+
                     </select>
                 </div>
 

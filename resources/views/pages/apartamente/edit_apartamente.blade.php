@@ -20,33 +20,53 @@
                 <div class="form-group">
                     <h5>Cladirea <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <select name="cladiri_id"  required="" class="form-control">
+                        <select name="cladiri_id"  required="" class="form-control @error('cladiri_id') is-invalid @enderror">
                             <option value="" selected="" disabled="">Selecteaza numele cladirii</option>
                             @foreach($cladiri as $cladire)
                                 <option value="{{ $cladire->id }}" {{ ($apartamente->cladiri_id == $cladire->id)? "selected": "" }}>{{ $cladire->nume }}</option>
                             @endforeach
-                        </select>                                    
+                        </select>
+                        @error('cladiri_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror                                                        
                     </div>
                 </div>   
 
                 <div class="form-group">
                     <h5> Etaj <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" value="{{ $apartamente->etaj }}" name="etaj" class="form-control" required="">
+                        <input type="text" value="{{ $apartamente->etaj }}" name="etaj" class="form-control @error('etaj') is-invalid @enderror" required="">
+                        @error('etaj')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror                    
                     </div>
                 </div>
 
                 <div class="form-group">
                     <h5> Numar <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" name="numar" value="{{ $apartamente->numar }}" class="form-control" required="">
+                        <input type="text" name="numar" value="{{ $apartamente->numar }}" class="form-control @error('numar') is-invalid @enderror" required="">
+                        @error('numar')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror                    
                     </div>
                 </div>
 
                 <div class="form-group">
                     <h5> Suprafata <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" name="suprafata"  value="{{ $apartamente->suprafata }}" class="form-control" required="">
+                        <input type="text" name="suprafata"  value="{{ $apartamente->suprafata }}" class="form-control @error('suprafata') is-invalid @enderror" required="">
+                        @error('suprafata')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror                    
                     </div>
                 </div>
 
@@ -64,7 +84,7 @@
 
                 <div class="form-check ">
                     <label><h5>Vedere la mare</h5></label><br>
-                    <input type="checkbox" name="vedere" {{ ($apartamente->vedere == 1)? 'checked' : '' }}  class="form-check-input float-md-right ">Da<br>                                                               
+                    <input type="checkbox" name="vedere" {{ ($apartamente->vedere == 1)? 'checked' : '' }}  class="form-check-input float-md-right @error('nume') is-invalid @enderror ">Da<br>                                                               
                 </div>
 
                 {{-- <div class="form-group">

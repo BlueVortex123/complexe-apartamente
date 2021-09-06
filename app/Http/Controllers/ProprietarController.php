@@ -82,18 +82,14 @@ class ProprietarController extends Controller
      */
     public function edit(Proprietar $proprietari)
     {
-        $apartamente = Apartament::with('proprietar')->get();
-
-        $selected_apartamente = [];
-
-        foreach ($proprietari->apartamente as $apartamente_prop)
-        {
-            array_push($selected_apartamente, $apartamente_prop->id);
-        }
+        
+        $selectedApartments = $proprietari->apartamente->map(function ($apartamente) {
+            return $apartamente->id;
+        })->toArray();
 
       
 
-        return view('pages.proprietar.edit_proprietar',compact('proprietari','apartamente','selected_apartamente'));
+        return view('pages.proprietar.edit_proprietar',compact('proprietari','selectedApartments'));
     }
     
     /**

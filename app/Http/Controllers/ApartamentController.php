@@ -44,10 +44,10 @@ class ApartamentController extends Controller
     public function store(Request $request)
     {
         $valdiated = $request->validate([
-            'etaj' => 'required',
-            'numar' => 'required',
+            'etaj' => 'required|min:1|max:2',
+            'numar' => 'required|min:1|max:100',
             'suprafata' => 'required',
-            'numar_camere' => 'required',
+            'numar_camere' => 'required|min:1|max:3',
             'proprietari_id' => 'exists:proprietari,id|nullable'
             ]);
             
@@ -99,10 +99,10 @@ class ApartamentController extends Controller
         {
             
             $valdiated = $request->validate([
-                'etaj' => 'required',
-                'numar' => 'required',
+                'etaj' => 'required|min:1|max:2',
+                'numar' => 'required|min:1|max:100',
                 'suprafata' => 'required',
-                'numar_camere' => 'required',
+                'numar_camere' => 'required|min:1|max:3',
                 'proprietari_id' => 'exists:proprietari,id|nullable'
                 ]);
 

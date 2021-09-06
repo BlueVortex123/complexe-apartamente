@@ -46,7 +46,7 @@ class CladireController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nume' => 'required|string|min:3|max:255',
+            'nume' => 'required|string|min:3|max:100',
             'numar_etaje' => 'required|string|min:1|max:2',
             ]);
             

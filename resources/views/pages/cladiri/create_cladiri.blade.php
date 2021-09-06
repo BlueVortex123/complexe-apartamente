@@ -19,27 +19,41 @@
                 <div class="form-group">
                     <h5>Complex <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <select name="complex_id"  required="" class="form-control">
+                        <select name="complex_id"  required="" class="form-control @error('complex_id') is-invalid @enderror">
                             <option value="" selected="" disabled="">Selecteaza numele complexului</option>
                             @foreach($complexe as $complex)
                             <option value="{{ $complex->id }}">{{ $complex->nume }}</option>
                             @endforeach
                         </select>                                    
+                        @error('complex_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror               
                     </div>
                 </div>   
 
                 <div class="form-group">
                     <h5> Nume <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" name="nume" class="form-control" required="">
-                        
+                        <input type="text" name="nume" class="form-control @error('nume') is-invalid @enderror" required="">
+                        @error('nume')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror           
                     </div>
                 </div>
 
                 <div class="form-group">
                     <h5>Numar de etaje <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="nume" name="numar_etaje" class="form-control"  required="">
+                        <input type="nume" name="numar_etaje" class="form-control @error('numar_etaje') is-invalid @enderror"  required="">
+                        @error('numar_etaje')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror              
                     </div>
                 </div>
 

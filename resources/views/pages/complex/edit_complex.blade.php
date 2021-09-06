@@ -21,7 +21,12 @@
 
                 <div class="form-group">
                     <h5> Nume<span class="text-danger">*</span></h5>
-                    <input type="text" name="nume" value="{{ $complexe->nume }}" class="form-control" required="">
+                    <input type="text" name="nume" value="{{ $complexe->nume }}" class="form-control @error('nume') is-invalid @enderror" required="">
+                    @error('nume')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     <div class="controls">
                     </div>
                 </div>
@@ -29,7 +34,12 @@
                 <div class="form-group">
                     <h5>Adresa <span class="text-danger">*</span></h5>
                     <div class="controls">
-                        <input type="text" name="adresa" value="{{ $complexe->adresa }}" class="form-control" required="">
+                        <input type="text" name="adresa" value="{{ $complexe->adresa }}" class="form-control @error('adresa') is-invalid @enderror" required="">
+                        @error('adresa')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     </div>
                 </div>
 

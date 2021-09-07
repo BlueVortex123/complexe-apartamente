@@ -24,8 +24,10 @@ class UpdateCladireRequest extends FormRequest
     public function rules()
     {
         return [
-            'nume' => 'required|string|min:3|max:100',
+            'nume' => 'required|string|min:2|max:100',
             'numar_etaje' => 'required|string|min:1|max:2',
+            'complex_id' => 'exists:complexe,id|required',
+
         ];
     }
 }

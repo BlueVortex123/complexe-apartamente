@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\PermissionRegistrar;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -17,7 +18,11 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        Role::create(['name' => 'admin']);
+        Permission::create(['name' => 'view navbar']);
+        
+        $admin = Role::create(['name' => 'admin']);
+        $admin->givePermissionTo('view navbar');
+
         Role::create(['name' => 'contabil']);
 
     }

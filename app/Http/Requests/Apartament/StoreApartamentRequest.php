@@ -28,7 +28,8 @@ class StoreApartamentRequest extends FormRequest
             'numar' => 'required|min:1|max:100|unique:apartamente,numar', 
             'suprafata' => 'required',
             'numar_camere' => 'required|min:1|max:3',
-            'proprietari_id' => 'exists:proprietari,id|nullable'
+            'proprietari_id' => 'exists:proprietari,id|nullable',
+            'cladiri_id' => 'exists:cladiri,id|required'
         ];
     }
 }

@@ -21,7 +21,7 @@ class CladireController extends Controller
         $cladiri = Cladire::with('complex','apartamente')->get();
         $apartamente = Apartament::with('cladire')->get();
 
-        // dd($cladiri->pluck('apartamente')->count('id'));
+        // dd($cladiri->pluck('')->count('id'));
        
 
        
@@ -50,7 +50,6 @@ class CladireController extends Controller
        
     
             $cladire =  Cladire::create($request->validated());
-            $cladire->complex_id = $request->complex_id;
             $cladire->save();
             
             return redirect()->route('cladiri.index');

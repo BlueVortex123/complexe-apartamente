@@ -28,7 +28,9 @@ class UpdateApartamentRequest extends FormRequest
             "numar" => "required|integer|digits_between:1,3|unique:apartamente,numar,{$this->apartamente->id}", 
             'suprafata' => 'required',
             'numar_camere' => 'required|min:1|max:3',
-            'proprietari_id' => 'exists:proprietari,id|nullable'
+            'proprietari_id' => 'exists:proprietari,id|nullable',
+            'cladiri_id' => 'exists:cladiri,id|required'
+
         ];
     }
 }

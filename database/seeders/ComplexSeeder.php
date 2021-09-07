@@ -16,17 +16,17 @@ class ComplexSeeder extends Seeder
     {
         Complex::create([
             'nume' => 'Complex A',
-            'address' => 'Adresa 1 compelex a'
+            'adresa' => 'Adresa 1 compelex a'
         ]);
         
         Complex::create([
             'nume' => 'Complex B',
-            'address' => 'Adresa 2 complex b'
+            'adresa' => 'Adresa 2 complex b'
             ]);
        
         Complex::create([
             'nume' => 'Complex C',
-            'address' => 'Adresa 3 complex c'
+            'adresa' => 'Adresa 3 complex c'
             ]);
     }
 }

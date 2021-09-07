@@ -10,21 +10,30 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                @can('admin')
+              
+                @can('view complex')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('complexe.index') }}">Complexe</a>
                 </li>
+                @endcan
                 
+                @can('view cladiri')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('cladiri.index') }}">Cladiri</a>
                 </li>
+                @endcan
+                
+                @can('view apartamente')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('apartamente.index') }}">Apartamente</a>
                 </li>
                 @endcan
+               
+                @can('view proprietari')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('proprietari.index') }}">Proprietari</a>
                 </li>
+                @endcan
             </ul>
 
             <!-- Right Side Of Navbar -->

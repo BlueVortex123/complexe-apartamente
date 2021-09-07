@@ -32,7 +32,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
 
         $agent = Role::create(['name' => 'agent']);
-        $agent->givePermissionTo(['view complex', 'view cladiri']);
+        $agent->givePermissionTo(['view complex', 'view cladiri', 'view apartamente']);
 
     }
 }
